@@ -13,9 +13,5 @@ public class ClientService {
     public Client createClient(Client client) {
         return clientRepository.save(client);
     }
-
-    public Client getClient(Long id) {
-        return clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
-    }
 }
 

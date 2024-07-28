@@ -16,10 +16,5 @@ public class ClientController {
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         return ResponseEntity.ok(clientService.createClient(client));
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Client> getClient(@PathVariable Long id) {
-        return ResponseEntity.ok(clientService.getClient(id));
-    }
 }
 
