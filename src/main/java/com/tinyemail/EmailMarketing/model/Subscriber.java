@@ -8,7 +8,11 @@ public class Subscriber {
     private Long id;
     private String email;
 
-    // Getters and Setters
+    public Subscriber(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }

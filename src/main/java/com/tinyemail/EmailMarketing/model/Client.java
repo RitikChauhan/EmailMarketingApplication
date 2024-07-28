@@ -13,8 +13,6 @@ public class Client {
 
     private String name;
 
-    // Getters and Setters
-
     public Long getId() {
         return id;
     }

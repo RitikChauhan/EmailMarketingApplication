@@ -2,6 +2,7 @@ package com.tinyemail.EmailMarketing.model;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,6 @@ public class Campaign {
     )
     private Set<Subscriber> subscribers = new HashSet<>();
 
-    // Getters and Setters
 
     public Long getId() {
         return id;

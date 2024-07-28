@@ -2,6 +2,7 @@ package com.tinyemail.EmailMarketing.service;
 
 import com.tinyemail.EmailMarketing.model.Campaign;
 import com.tinyemail.EmailMarketing.model.CampaignStatus;
+import com.tinyemail.EmailMarketing.model.Subscriber;
 import com.tinyemail.EmailMarketing.repository.CampaignRepository;
 import com.tinyemail.EmailMarketing.util.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class CampaignService {
                 .orElseThrow(() -> new RuntimeException("Campaign not found"));
         campaign.setStatus(CampaignStatus.SENT);
         campaignRepository.save(campaign);
-        mockEmailService.sendEmail(campaign);
+
+        // Send emails to all subscribers
+        for (Subscriber subscriber : campaign.getSubscribers()) {
+            mockEmailService.sendEmail(subscriber.getEmail(), campaign.getSubject(), campaign.getBody());
+        }
         return campaign;
     }
 }

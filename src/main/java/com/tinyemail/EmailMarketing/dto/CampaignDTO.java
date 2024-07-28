@@ -5,10 +5,6 @@ public class CampaignDTO {
     private String subject;
     private String emailBody;
 
-    // Default constructor
-    public CampaignDTO() {}
-
-    // Parameterized constructor
     public CampaignDTO(String name, String subject, String emailBody) {
         this.name = name;
         this.subject = subject;

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MockEmailService {
-    public void sendEmail(Campaign campaign) {
-        // Simulate sending email by printing to console
-        System.out.println("Sending email campaign: " + campaign.getName());
-        // Email sending logic would go here
+    public void sendEmail(String to, String subject, String body) {
+        System.out.println("Sending email to " + to);
+        System.out.println("Subject: " + subject);
+        System.out.println("Body: " + body);
     }
 }

@@ -3,7 +3,9 @@ package com.tinyemail.EmailMarketing.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinyemail.EmailMarketing.dto.CampaignDTO;
 import com.tinyemail.EmailMarketing.model.Campaign;
+import com.tinyemail.EmailMarketing.model.Subscriber;
 import com.tinyemail.EmailMarketing.service.CampaignService;
+import com.tinyemail.EmailMarketing.util.MockEmailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,6 +40,9 @@ public class CampaignControllerTest {
 
     @MockBean
     private CampaignService campaignService;
+
+    @MockBean
+    private MockEmailService mockEmailService;
 
     private MockMvc mockMvc;
 
@@ -95,16 +101,14 @@ public class CampaignControllerTest {
 
     @Test
     public void testSendCampaign() throws Exception {
-        // Prepare mock data
         Campaign campaign = new Campaign();
         campaign.setName("Campaign A");
         campaign.setSubject("Subject A");
         campaign.setBody("Email body A");
+        campaign.setSubscribers(new HashSet<>(Arrays.asList(new Subscriber(1L, "test1@example.com"), new Subscriber(2L, "test2@example.com"))));
 
-        // Mock the service call
         when(campaignService.sendCampaign(anyLong())).thenReturn(campaign);
 
-        // Perform the request and verify the response
         mockMvc.perform(post("/campaigns/1/send")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
