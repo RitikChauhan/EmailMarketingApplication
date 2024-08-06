@@ -13,6 +13,8 @@ public class Subscriber {
         this.email = email;
     }
 
+    public Subscriber(){}
+
     public Long getId() {
         return id;
     }

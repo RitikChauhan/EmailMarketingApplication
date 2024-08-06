@@ -21,6 +21,7 @@ public class CampaignController {
         campaign.setName(campaignDTO.getName());
         campaign.setSubject(campaignDTO.getSubject());
         campaign.setBody(campaignDTO.getEmailBody());
+        campaign.setSubscribers(campaignDTO.getSubscribers());
 
         return ResponseEntity.ok(campaignService.createCampaign(clientId, campaign));
     }

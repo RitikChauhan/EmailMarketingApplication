@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -53,7 +54,10 @@ public class CampaignControllerTest {
 
     @Test
     public void testCreateCampaign() throws Exception {
-        CampaignDTO campaignDTO = new CampaignDTO("Campaign A", "Subject A", "Email body A");
+        Set<Subscriber> subscribers = new HashSet<>();
+        subscribers.add(new Subscriber(1L, "ritik@gmail.com"));
+
+        CampaignDTO campaignDTO = new CampaignDTO("Campaign A", "Subject A", "Email body A", subscribers);
 
         Campaign campaign = new Campaign();
         campaign.setName(campaignDTO.getName());
